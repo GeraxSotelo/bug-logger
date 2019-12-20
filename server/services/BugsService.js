@@ -34,6 +34,7 @@ class BugsService {
     if (!data) {
       throw new ApiError("Invalid ID bro");
     }
+    return data;
   }
 }
 
