@@ -22,11 +22,16 @@ class BugsService {
   }
 
   async edit(id, update) {
-    let data = await _repository.findByIdAndUpdate({ _id: id }, update, { new: true });
-    if (!data) {
-      throw new ApiError("Invalid ID bro");
+    let bug = await _repository.findById(id);
+    if (!bug.closed) {
+      let data = await _repository.findByIdAndUpdate({ _id: id }, update, { new: true });
+      if (!data) {
+        throw new ApiError("Invalid ID bro");
+      }
+      return data;
+    } else {
+      throw new ApiError("Can't edit a closed bug bro")
     }
-    return data;
   }
 
   async delete(id) {
