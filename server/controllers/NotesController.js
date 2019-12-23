@@ -6,7 +6,7 @@ export default class NotesController {
     this.router = express.Router()
       .get("/:id/notes", this.getAll)
       .get("/:id/notes/:id", this.getById)
-      .post("/:id/notes", this.create)
+      .post("", this.create)
       .put(":id/notes/:id", this.edit)
       .delete(":id/notes/:id", this.delete)
 
@@ -32,7 +32,7 @@ export default class NotesController {
 
   async create(req, res, next) {
     try {
-      let data = await NotesService.create(req.params.id, req.body)
+      let data = await NotesService.create(req.body)
       return res.send(data)
     } catch (error) {
       next(error)
@@ -50,5 +50,6 @@ export default class NotesController {
 
   async delete(req, res, next) {
     await NotesService.delete(req.params.id)
+    res.send("Deleted")
   }
 }
