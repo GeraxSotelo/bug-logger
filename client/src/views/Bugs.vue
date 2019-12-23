@@ -31,16 +31,27 @@
       </div>
     </div>
     <div class="row">
-      <div class="col">{{bugs}}</div>
+      <div class="col">
+        <ul class="list-group">
+          <!-- <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li> -->
+          <li class="list-group-item">
+            <div class="d-flex bd-highlight">
+              <div class="p-2 bd-highlight">Title</div>
+              <div class="p-2 flex-grow-1 bd-highlight">Reported By</div>
+              <div class="p-2 bd-highlight">Last Modified</div>
+            </div>
+          </li>
+          <li class="list-group-item" v-for="bug in bugs" :key="bug.id">
+            <bug-component :bugData="bug" />
+          </li>
+        </ul>
+      </div>
     </div>
-    <ul class="list-group">
-      <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
-      <li class="list-group-item">{{bugs.description}}</li>
-    </ul>
   </div>
 </template>
 
 <script>
+import BugComponent from "@/components/Bug";
 export default {
   name: "bugs",
   mounted() {
@@ -72,6 +83,9 @@ export default {
     bugs() {
       return this.$store.state.bugs;
     }
+  },
+  components: {
+    BugComponent
   }
 };
 </script>
