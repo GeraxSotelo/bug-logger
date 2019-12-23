@@ -6,7 +6,12 @@
         <form @submit.prevent="createBug">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" v-model="newBug.name" placeholder="Enter Name" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="newBug.reportedBy"
+              placeholder="Enter Name"
+            />
           </div>
           <div class="form-group">
             <label>Title</label>
@@ -44,9 +49,10 @@ export default {
   data() {
     return {
       newBug: {
-        name: "",
+        reportedBy: "",
         title: "",
-        description: ""
+        description: "",
+        closed: false
       }
     };
   },
@@ -55,9 +61,10 @@ export default {
       let bug = { ...this.newBug };
       this.$store.dispatch("createBug", bug);
       this.newBug = {
-        name: "",
+        reportedBy: "",
         title: "",
-        description: ""
+        description: "",
+        closed: false
       };
     }
   },
