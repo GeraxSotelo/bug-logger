@@ -1,6 +1,6 @@
 <template>
   <div class="bugs container-fluid">
-    <div class="row">
+    <div class="row pb-1">
       <div class="col col-md-6 col-lg-4 mx-auto">
         <h1>Report a Bug</h1>
         <form @submit.prevent="createBug">
@@ -26,25 +26,25 @@
               placeholder="Bug Description"
             />
           </div>
-          <button class="btn btn-danger">Report</button>
+          <button class="btn btn-danger mt-2">Report</button>
         </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <ul class="list-group">
-          <!-- <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li> -->
-          <li class="list-group-item">
-            <div class="d-flex bd-highlight">
-              <div class="p-2 bd-highlight">Title</div>
-              <div class="p-2 flex-grow-1 bd-highlight">Reported By</div>
-              <div class="p-2 bd-highlight">Last Modified</div>
-            </div>
-          </li>
-          <li class="list-group-item" v-for="bug in bugs" :key="bug.id">
-            <bug-component :bugData="bug" />
-          </li>
-        </ul>
+    <div class="row pt-3">
+      <div class="col col-lg-10 mx-auto">
+        <table class="table table-bordered table-striped table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Reported By</th>
+              <th scope="col">Status</th>
+              <th scope="col">Last Modified</th>
+            </tr>
+          </thead>
+          <tbody>
+            <bug-component v-for="bug in bugs" :key="bug.id" :bugData="bug" />
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -91,4 +91,11 @@ export default {
 </script>
 
 <style>
+.form-group {
+  text-align: left;
+  margin-bottom: 0;
+}
+label {
+  margin-bottom: 0.15rem;
+}
 </style>

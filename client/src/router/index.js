@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 // @ts-ignore
 import Bug from "../views/Bugs.vue"
+// @ts-ignore
+import BugDetails from "../views/BugDetails"
 
 Vue.use(VueRouter)
 
@@ -17,6 +19,11 @@ const routes = [
     path: '/bugs',
     name: 'bugs',
     component: Bug
+  },
+  {
+    path: '/bugs/:id',
+    name: 'bugDetails',
+    component: BugDetails
   }
 ]
 

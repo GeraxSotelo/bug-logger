@@ -10,7 +10,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    bugs: []
+    bugs: [],
+    activeBug: {}
   },
   mutations: {
     addBug(state, bug) {
@@ -19,12 +20,21 @@ export default new Vuex.Store({
 
     setAllBugs(state, data) {
       state.bugs = data;
+    },
+
+    setActiveBug(state, bug) {
+      state.activeBug = bug;
     }
   },
   actions: {
     async getAllBugs({ commit, dispatch }) {
       let res = await _api.get("bugs");
       commit("setAllBugs", res.data);
+    },
+
+    async getBugById({ commit, dispatch }, id) {
+      let res = await _api.get("bugs/" + id);
+      commit("setActiveBug", res.data);
     },
 
     async createBug({ commit, dispatch }, bug) {
