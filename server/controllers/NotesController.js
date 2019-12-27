@@ -4,8 +4,7 @@ import NotesService from "../services/NotesService"
 export default class NotesController {
   constructor() {
     this.router = express.Router()
-      .get("/:id/notes", this.getAll)
-      .get("/:id/notes/:id", this.getById)
+      .get("", this.getAll)
       .post("", this.create)
       .put(":id/notes/:id", this.edit)
       .delete(":id/notes/:id", this.delete)
@@ -15,15 +14,6 @@ export default class NotesController {
   async getAll(req, res, next) {
     try {
       let data = await NotesService.getAll()
-      return res.send(data)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async getById(req, res, next) {
-    try {
-      let data = await NotesService.getById(req.params.id)
       return res.send(data)
     } catch (error) {
       next(error)
