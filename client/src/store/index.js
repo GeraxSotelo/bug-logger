@@ -10,9 +10,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    bugs: [],
+    bugs: [{ closed: false, description: "Needs to get fixed pronto", title: "Bug on page", reportedBy: "Gerax", id: '12345', updatedAt: "12/27/2019" }],
     activeBug: {},
-    notes: []
+    notes: [],
+    activeNotes: [{ content: "Is anyone working on this", bug: '12345', reportedBy: 'Admin', flagged: "pending" }]
   },
   mutations: {
     addBug(state, bug) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
 
     addNote(state, note) {
       state.notes.push(note);
+    },
+    setActiveNotes(state, data) {
+      state.activeNotes = data;
     }
   },
   actions: {
@@ -50,6 +54,11 @@ export default new Vuex.Store({
     async createNote({ commit, dispatch }, note) {
       let res = await _api.post("notes", note);
       commit("addNote", res.data);
+    },
+
+    async getNotesByBugId({ commit, dispatch }, id) {
+      let res = await _api.get("bugs/" + id + "/notes");
+      commit("setActiveNotes", res.data);
     }
   },
   modules: {

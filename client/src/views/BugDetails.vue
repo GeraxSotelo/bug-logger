@@ -36,14 +36,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">
+            <tr v-for="note in notes" :key="note.id">
+              <td scope="row">
                 <div>
-                  <p>First Note</p>
+                  <p>{{note.reportedBy}}</p>
                 </div>
-              </th>
+              </td>
               <td>
-                <p>Second Note</p>
+                <p>{{note.content}}</p>
               </td>
               <td>
                 <i class="fas fa-trash"></i>
@@ -84,6 +84,7 @@ export default {
   name: "bugDetails",
   mounted() {
     this.$store.dispatch("getBugById", this.$route.params.id);
+    this.$store.dispatch("getNotesByBugId", this.$route.params.id);
   },
   data() {
     return {
@@ -135,6 +136,14 @@ export default {
   computed: {
     bug() {
       return this.$store.state.activeBug;
+    },
+    setNewNotes() {
+      //FIXME ADDED NOTES NOT SHOWING UP IMMEDIATELY
+      let data = this.$store.state.notes;
+      this.$store.dispatch("getNotesByBugId", this.$route.params.id);
+    },
+    notes() {
+      return this.$store.state.activeNotes;
     }
   }
 };
