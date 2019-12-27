@@ -11,7 +11,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     bugs: [],
-    activeBug: {}
+    activeBug: {},
+    notes: []
   },
   mutations: {
     addBug(state, bug) {
@@ -24,6 +25,10 @@ export default new Vuex.Store({
 
     setActiveBug(state, bug) {
       state.activeBug = bug;
+    },
+
+    addNote(state, note) {
+      state.notes.push(note);
     }
   },
   actions: {
@@ -40,6 +45,11 @@ export default new Vuex.Store({
     async createBug({ commit, dispatch }, bug) {
       let res = await _api.post("bugs", bug);
       commit("addBug", res.data)
+    },
+
+    async createNote({ commit, dispatch }, note) {
+      let res = await _api.post("notes", note);
+      commit("addNote", res.data);
     }
   },
   modules: {

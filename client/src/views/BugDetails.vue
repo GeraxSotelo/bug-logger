@@ -2,7 +2,7 @@
   <div class="bug-details container-fluid">
     <div class="row">
       <div class="col-12">
-        <p>Title:</p>
+        <p class="m-0">Title:</p>
       </div>
       <div class="col-12">
         <h1>{{bug.title}}</h1>
@@ -18,6 +18,64 @@
         >{{this.isClosed(bug.closed)}}</span>
       </div>
     </div>
+    <div class="row pt-3 pb-1">
+      <div class="col-12 border">{{bug.description}}</div>
+      <div class="col-12 text-right">
+        <button @click="closeBug()" class="btn btn-danger">CLOSE</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h1>NOTES</h1>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Message</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <div>
+                  <p>First Note</p>
+                </div>
+              </th>
+              <td>
+                <p>Second Note</p>
+              </td>
+              <td>
+                <i class="fas fa-trash"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6 mx-auto">
+        <form @submit.prevent="createNote">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" v-model="newNote.reportedBy" placeholder="Name" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <!-- //TODO check input type -->
+            <!-- <input type="text" class="form-control" v-model="newNote.content" /> -->
+            <textarea
+              id="textArea"
+              rows="8"
+              cols="50"
+              class="form-control"
+              v-model="newNote.content"
+            ></textarea>
+          </div>
+          <button class="btn btn-danger mt-2">Add Note</button>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,11 +86,50 @@ export default {
     this.$store.dispatch("getBugById", this.$route.params.id);
   },
   data() {
-    return {};
+    return {
+      newNote: {
+        reportedBy: "",
+        content: "",
+        flagged: "pending",
+        bug: this.$route.params.id
+      }
+    };
   },
   methods: {
+    createNote() {
+      let note = { ...this.newNote };
+      this.$store.dispatch("createNote", note);
+      this.newNote = {
+        reportedBy: "",
+        content: "",
+        flagged: "pending",
+        bug: this.$route.params.id
+      };
+    },
     isClosed(data) {
       return data ? "Closed" : "Open";
+    },
+    closeBug() {
+      //TODO add logic to close bug
+      Swal.fire({
+        title: "Are you sure?",
+        text: "This cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Deleted",
+            showConfirmButton: false,
+            timer: 900
+          });
+        }
+      });
     }
   },
   computed: {
