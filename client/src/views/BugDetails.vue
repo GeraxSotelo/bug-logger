@@ -106,6 +106,7 @@ export default {
         flagged: "pending",
         bug: this.$route.params.id
       };
+      this.$store.dispatch("addActiveNote", note);
     },
     isClosed(data) {
       return data ? "Closed" : "Open";
@@ -136,11 +137,6 @@ export default {
   computed: {
     bug() {
       return this.$store.state.activeBug;
-    },
-    setNewNotes() {
-      //FIXME ADDED NOTES NOT SHOWING UP IMMEDIATELY
-      let data = this.$store.state.notes;
-      this.$store.dispatch("getNotesByBugId", this.$route.params.id);
     },
     notes() {
       return this.$store.state.activeNotes;
