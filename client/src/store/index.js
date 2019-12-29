@@ -10,10 +10,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    bugs: [{ closed: false, description: "Needs to get fixed pronto", title: "Bug on page", reportedBy: "Gerax", id: '12345', updatedAt: "12/27/2019" }],
+    bugs: [],
     activeBug: {},
     notes: [],
-    activeNotes: [{ content: "Is anyone working on this", bug: '12345', reportedBy: 'Admin', flagged: "pending" }]
+    activeNotes: []
   },
   mutations: {
     addBug(state, bug) {
