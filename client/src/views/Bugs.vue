@@ -68,15 +68,20 @@ export default {
     };
   },
   methods: {
-    createBug() {
+    async createBug() {
       let bug = { ...this.newBug };
-      this.$store.dispatch("createBug", bug);
+      await this.$store.dispatch("createBug", bug);
       this.newBug = {
         reportedBy: "",
         title: "",
         description: "",
         closed: false
       };
+      this.$router.push("bugs/" + this.goToBug());
+    },
+    goToBug() {
+      let bug = this.$store.state.bugs;
+      return bug[bug.length - 1].id;
     }
   },
   computed: {
