@@ -32,6 +32,8 @@
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Message</th>
+              <th scope="col">Status</th>
+              <th scope="col">Last Modified</th>
               <th scope="col">Delete</th>
             </tr>
           </thead>
@@ -52,7 +54,7 @@
             <label>Message</label>
             <textarea rows="8" cols="50" class="form-control" v-model="newNote.content"></textarea>
           </div>
-          <button class="btn btn-danger mt-2">Add Note</button>
+          <button class="btn btn-danger mt-2 mb-2">Add Note</button>
         </form>
       </div>
     </div>

@@ -1,12 +1,18 @@
 <template>
-  <tr class="note align-items-center">
+  <tr class="note">
     <td scope="row">
       <div>
         <p>{{noteData.reportedBy}}</p>
       </div>
     </td>
-    <td>
+    <td class="note-content">
       <p>{{noteData.content}}</p>
+    </td>
+    <td>
+      <p>{{noteData.flagged}}</p>
+    </td>
+    <td>
+      <p>{{this.convertDate(noteData.updatedAt)}}</p>
     </td>
     <td>
       <i @click="deleteNote(noteData.id)" class="fas fa-trash"></i>
@@ -27,6 +33,10 @@ export default {
     return {};
   },
   methods: {
+    convertDate(date) {
+      let d = new Date(date);
+      return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
+    },
     deleteNote(noteId) {
       Swal.fire({
         title: "Are you sure?",
@@ -58,11 +68,15 @@ export default {
 
 <style>
 .table td {
+  padding: 0.3em;
   vertical-align: middle;
 }
 td i {
   color: rgb(219, 0, 0);
   cursor: pointer;
   font-size: 1.3em;
+}
+.note-content {
+  max-width: 40em;
 }
 </style>

@@ -96,6 +96,9 @@ export default {
 </script>
 
 <style>
+.bugs {
+  background-color: #e3b04b;
+}
 .form-group {
   text-align: left;
   margin-bottom: 0;
