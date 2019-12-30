@@ -53,6 +53,11 @@ export default new Vuex.Store({
       commit("addBug", res.data)
     },
 
+    async closeBug({ commit, dispatch }, id) {
+      let res = await _api.delete("bugs/" + id);
+      dispatch("getAllBugs");
+    },
+
     async createNote({ commit, dispatch }, note) {
       let res = await _api.post("notes", note);
       commit("addNote", res.data);

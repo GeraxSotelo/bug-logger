@@ -21,7 +21,7 @@
     <div class="row pt-3 pb-1">
       <div class="col-12 border">{{bug.description}}</div>
       <div class="col-12 text-right">
-        <button @click="closeBug()" class="btn btn-danger">CLOSE</button>
+        <button @click="closeBug(bug.id)" class="btn btn-danger">CLOSE</button>
       </div>
     </div>
     <div class="row">
@@ -62,8 +62,6 @@
           </div>
           <div class="form-group">
             <label>Message</label>
-            <!-- //TODO check input type -->
-            <!-- <input type="text" class="form-control" v-model="newNote.content" /> -->
             <textarea
               id="textArea"
               rows="8"
@@ -111,8 +109,7 @@ export default {
     isClosed(data) {
       return data ? "Closed" : "Open";
     },
-    closeBug() {
-      //TODO add logic to close bug
+    closeBug(id) {
       Swal.fire({
         title: "Are you sure?",
         text: "This cannot be undone!",
@@ -120,16 +117,17 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Yes, close it!"
       }).then(result => {
         if (result.value) {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Deleted",
+            title: "Bug Closed",
             showConfirmButton: false,
             timer: 900
           });
+          this.$store.dispatch("closeBug", id);
         }
       });
     }
