@@ -28,9 +28,6 @@ export default {
       required: true
     }
   },
-  data() {
-    return {};
-  },
   methods: {
     convertDate(date) {
       let d = new Date(date);

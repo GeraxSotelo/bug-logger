@@ -36,19 +36,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="note in notes" :key="note.id">
-              <td scope="row">
-                <div>
-                  <p>{{note.reportedBy}}</p>
-                </div>
-              </td>
-              <td>
-                <p>{{note.content}}</p>
-              </td>
-              <td>
-                <i class="fas fa-trash"></i>
-              </td>
-            </tr>
+            <NoteComponent v-for="note in notes" :key="note.id" :noteData="note" />
           </tbody>
         </table>
       </div>
@@ -62,13 +50,7 @@
           </div>
           <div class="form-group">
             <label>Message</label>
-            <textarea
-              id="textArea"
-              rows="8"
-              cols="50"
-              class="form-control"
-              v-model="newNote.content"
-            ></textarea>
+            <textarea rows="8" cols="50" class="form-control" v-model="newNote.content"></textarea>
           </div>
           <button class="btn btn-danger mt-2">Add Note</button>
         </form>
@@ -78,6 +60,7 @@
 </template>
 
 <script>
+import NoteComponent from "@/components/Note";
 export default {
   name: "bugDetails",
   mounted() {
@@ -139,6 +122,9 @@ export default {
     notes() {
       return this.$store.state.activeNotes;
     }
+  },
+  components: {
+    NoteComponent
   }
 };
 </script>

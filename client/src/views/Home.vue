@@ -14,17 +14,17 @@
         </router-link>
       </div>
     </div>
-    <div class="row pt-3">
-      <div class="col-12 card col-md-4">
-        <h2>BUG</h2>
+    <div class="row pt-3 bg-grey">
+      <div class="col-12 card col-md-4 bg-grey">
+        <i class="fas fa-bug"></i>
         <p>Report a Bug</p>
       </div>
-      <div class="col-12 card col-md-4">
-        <h2>BUG</h2>
+      <div class="col-12 card col-md-4 bg-grey">
+        <i class="fas fa-tools"></i>
         <p>We fix it</p>
       </div>
-      <div class="col-12 card col-md-4">
-        <h2>BUG</h2>
+      <div class="col-12 card col-md-4 bg-grey">
+        <i class="fas fa-laugh-beam"></i>
         <p>You're happy</p>
       </div>
     </div>
@@ -46,14 +46,25 @@ export default {
   background-color: white;
   font-weight: bold;
 }
+.btn h5 {
+  font-weight: bold;
+  margin-bottom: 0;
+}
 .home-container {
-  background-color: orange;
+  background-color: #e3b04b;
   color: white;
   padding-top: 2em;
   padding-bottom: 4.5em;
 }
+.bg-grey {
+  background-color: #f8f8f8;
+}
 .card {
   min-height: 10em;
   justify-content: space-around;
+}
+
+.card i {
+  font-size: 3em;
 }
 </style>
