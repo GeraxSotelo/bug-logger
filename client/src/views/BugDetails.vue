@@ -108,7 +108,7 @@ export default {
             icon: "success",
             title: "Bug Closed",
             showConfirmButton: false,
-            timer: 900
+            timer: 850
           });
           this.$store.dispatch("closeBug", id);
         }

@@ -7,8 +7,7 @@ export default class NotesController {
       .get("", this.getAll)
       .post("", this.create)
       .put(":id/notes/:id", this.edit)
-      .delete(":id/notes/:id", this.delete)
-
+      .delete("/:id", this.delete)
   }
 
   async getAll(req, res, next) {

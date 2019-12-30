@@ -67,8 +67,14 @@ export default new Vuex.Store({
       let res = await _api.get("bugs/" + id + "/notes")
       commit("getNotesByBugId", res.data);
     },
+
     addActiveNote({ commit, dispatch }, note) {
       commit("addActiveNote", note);
+    },
+
+    async deleteNote({ commit, dispatch }, ids) {
+      let res = await _api.delete("notes/" + ids.noteId);
+      dispatch("getNotesByBugId", ids.bugId)
     }
   },
   modules: {
