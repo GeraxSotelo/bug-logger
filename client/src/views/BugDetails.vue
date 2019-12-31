@@ -32,20 +32,7 @@
     <div class="row">
       <div class="col-12">
         <h1>NOTES</h1>
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Message</th>
-              <th scope="col">Status</th>
-              <th scope="col">Last Modified</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <NoteComponent v-for="note in notes" :key="note.id" :noteData="note" />
-          </tbody>
-        </table>
+        <NotesComponent :bugData="bug" />
       </div>
     </div>
     <div class="row">
@@ -68,6 +55,7 @@
 
 <script>
 import NoteComponent from "@/components/Note";
+import NotesComponent from "@/views/Notes";
 export default {
   name: "bugDetails",
   mounted() {
@@ -94,7 +82,6 @@ export default {
         flagged: "pending",
         bug: this.$route.params.id
       };
-      this.$store.dispatch("addActiveNote", note);
     },
     isClosed(data) {
       return data ? "Closed" : "Open";
@@ -147,7 +134,8 @@ export default {
     }
   },
   components: {
-    NoteComponent
+    NoteComponent,
+    NotesComponent
   }
 };
 </script>

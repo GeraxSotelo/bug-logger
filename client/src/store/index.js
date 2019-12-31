@@ -30,7 +30,7 @@ export default new Vuex.Store({
     addNote(state, note) {
       state.notes.push(note);
     },
-    getNotesByBugId(state, data) {
+    setNotesByBugId(state, data) {
       state.activeNotes = data;
     },
     addActiveNote(state, note) {
@@ -55,8 +55,6 @@ export default new Vuex.Store({
 
     async editBug({ commit, dispatch }, { id, reportedBy, title, description }) {
       let res = await _api.put("bugs/" + id, { reportedBy, title, description });
-      console.log(res.data);
-
       dispatch("getBugById", id);
     },
 
@@ -69,15 +67,12 @@ export default new Vuex.Store({
     async createNote({ commit, dispatch }, note) {
       let res = await _api.post("notes", note);
       commit("addNote", res.data);
+      commit("addActiveNote", res.data);
     },
 
     async getNotesByBugId({ commit, dispatch }, id) {
       let res = await _api.get("bugs/" + id + "/notes")
-      commit("getNotesByBugId", res.data);
-    },
-
-    addActiveNote({ commit, dispatch }, note) {
-      commit("addActiveNote", note);
+      commit("setNotesByBugId", res.data);
     },
 
     async deleteNote({ commit, dispatch }, ids) {
