@@ -21,7 +21,7 @@
     <div class="row pt-3 pb-1">
       <div class="col-12 border">
         <div class="text-right">
-          <button @click="editBug(bug)" class="btn btn-outline-secondary">Edit</button>
+          <button @click="editBug(bug)" class="btn btn-outline-secondary mt-2 mb-2">Edit</button>
         </div>
         <p>{{bug.description}}</p>
       </div>
@@ -35,26 +35,10 @@
         <NotesComponent :bugData="bug" />
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 col-md-6 mx-auto">
-        <form @submit.prevent="createNote">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" v-model="newNote.reportedBy" placeholder="Name" />
-          </div>
-          <div class="form-group">
-            <label>Message</label>
-            <textarea rows="8" cols="50" class="form-control" v-model="newNote.content"></textarea>
-          </div>
-          <button class="btn btn-danger mt-2 mb-2">Add Note</button>
-        </form>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import NoteComponent from "@/components/Note";
 import NotesComponent from "@/views/Notes";
 export default {
   name: "bugDetails",
@@ -62,27 +46,7 @@ export default {
     this.$store.dispatch("getBugById", this.$route.params.id);
     this.$store.dispatch("getNotesByBugId", this.$route.params.id);
   },
-  data() {
-    return {
-      newNote: {
-        reportedBy: "",
-        content: "",
-        flagged: "pending",
-        bug: this.$route.params.id
-      }
-    };
-  },
   methods: {
-    createNote() {
-      let note = { ...this.newNote };
-      this.$store.dispatch("createNote", note);
-      this.newNote = {
-        reportedBy: "",
-        content: "",
-        flagged: "pending",
-        bug: this.$route.params.id
-      };
-    },
     isClosed(data) {
       return data ? "Closed" : "Open";
     },
@@ -128,13 +92,9 @@ export default {
   computed: {
     bug() {
       return this.$store.state.activeBug;
-    },
-    notes() {
-      return this.$store.state.activeNotes;
     }
   },
   components: {
-    NoteComponent,
     NotesComponent
   }
 };

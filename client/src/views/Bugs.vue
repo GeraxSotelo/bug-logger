@@ -11,11 +11,18 @@
               class="form-control"
               v-model="newBug.reportedBy"
               placeholder="Enter Name"
+              required
             />
           </div>
           <div class="form-group">
             <label>Title</label>
-            <input type="text" class="form-control" v-model="newBug.title" placeholder="Title" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="newBug.title"
+              placeholder="Title"
+              required
+            />
           </div>
           <div class="form-group">
             <label>Description</label>
@@ -24,6 +31,7 @@
               class="form-control"
               v-model="newBug.description"
               placeholder="Bug Description"
+              required
             />
           </div>
           <button class="btn btn-danger mt-2">Report</button>
