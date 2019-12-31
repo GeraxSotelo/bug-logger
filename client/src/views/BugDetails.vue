@@ -19,7 +19,12 @@
       </div>
     </div>
     <div class="row pt-3 pb-1">
-      <div class="col-12 border">{{bug.description}}</div>
+      <div class="col-12 border">
+        <div class="text-right">
+          <button @click="editBug(bug)" class="btn btn-outline-secondary">Edit</button>
+        </div>
+        <p>{{bug.description}}</p>
+      </div>
       <div class="col-12 text-right">
         <button @click="closeBug(bug.id)" class="btn btn-danger">CLOSE</button>
       </div>
@@ -93,6 +98,22 @@ export default {
     },
     isClosed(data) {
       return data ? "Closed" : "Open";
+    },
+    async editBug(bug) {
+      const { value: formValues } = await Swal.fire({
+        title: "Multiple inputs",
+        html:
+          `<input id="swal-input1" class="swal2-input" value="${bug.reportedBy}">` +
+          `<input id="swal-input2" class="swal2-input" value="${bug.title}">` +
+          `<textarea id="swal-input3" class="swal2-input">${bug.description}</textarea>`,
+        focusConfirm: false
+      });
+      this.$store.dispatch("editBug", {
+        id: bug.id,
+        reportedBy: document.getElementById("swal-input1").value,
+        title: document.getElementById("swal-input2").value,
+        description: document.getElementById("swal-input3").value
+      });
     },
     closeBug(id) {
       Swal.fire({
