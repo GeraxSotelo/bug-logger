@@ -15,7 +15,6 @@
       </tbody>
     </table>
     <button
-      id="noteBtn"
       :disabled="bugData.closed"
       @click="createNote()"
       class="btn btn-danger mt-2 mb-2"
