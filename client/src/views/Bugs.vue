@@ -85,11 +85,7 @@ export default {
         description: "",
         closed: false
       };
-      this.$router.push("bugs/" + this.goToBug());
-    },
-    goToBug() {
-      let bug = this.$store.state.bugs;
-      return bug[bug.length - 1].id;
+      this.$router.push("bugs/" + this.$store.state.activeBug.id);
     }
   },
   computed: {
