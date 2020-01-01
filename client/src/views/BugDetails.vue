@@ -21,12 +21,16 @@
     <div class="row pt-3 pb-1">
       <div class="col-12 border">
         <div class="text-right">
-          <button @click="editBug(bug)" class="btn btn-outline-secondary mt-2 mb-2">Edit</button>
+          <button
+            @click="editBug(bug)"
+            class="btn btn-outline-secondary mt-2 mb-2"
+            :disabled="bug.closed"
+          >Edit</button>
         </div>
         <p>{{bug.description}}</p>
       </div>
       <div class="col-12 text-right">
-        <button @click="closeBug(bug.id)" class="btn btn-danger">CLOSE</button>
+        <button @click="closeBug(bug.id)" class="btn btn-danger" :disabled="bug.closed">CLOSE</button>
       </div>
     </div>
     <div class="row">
@@ -58,7 +62,8 @@ export default {
           `<input id="title" class="swal2-input" value="${bug.title}">` +
           `<textarea id="desc" class="swal2-input">${bug.description}</textarea>`,
         focusConfirm: false,
-        showCancelButton: true
+        showCancelButton: true,
+        cancelButtonColor: "#d33"
       });
       let editedBug = {
         id: bug.id,
@@ -72,6 +77,9 @@ export default {
       ) {
         Swal.fire("Please fill out all fields");
       } else if (!value.dismiss) {
+        if (bug.closed) {
+          Swal.fire("This bug is closed");
+        }
         this.$store.dispatch("editBug", editedBug);
       }
     },

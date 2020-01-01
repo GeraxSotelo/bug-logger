@@ -14,7 +14,13 @@
         <NoteComponent v-for="note in notes" :key="note.id" :noteData="note" />
       </tbody>
     </table>
-    <button @click="createNote" class="btn btn-danger mt-2 mb-2">Add Note</button>
+    <button
+      id="noteBtn"
+      :disabled="bugData.closed"
+      @click="createNote()"
+      class="btn btn-danger mt-2 mb-2"
+    >Add Note</button>
+    <p v-if="bugData.closed">This bug has been closed.</p>
   </div>
 </template>
 
@@ -22,6 +28,12 @@
 import NoteComponent from "@/components/Note";
 export default {
   name: "Notes",
+  props: {
+    bugData: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
     async createNote() {
       const value = await Swal.fire({
