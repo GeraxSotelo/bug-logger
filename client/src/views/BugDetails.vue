@@ -51,20 +51,29 @@ export default {
       return data ? "Closed" : "Open";
     },
     async editBug(bug) {
-      const { value: formValues } = await Swal.fire({
+      const value = await Swal.fire({
         title: "Multiple inputs",
         html:
-          `<input required id="swal-input1" class="swal2-input" value="${bug.reportedBy}">` +
-          `<input id="swal-input2" class="swal2-input" value="${bug.title}">` +
-          `<textarea id="swal-input3" class="swal2-input">${bug.description}</textarea>`,
-        focusConfirm: false
+          `<input id="name" class="swal2-input" value="${bug.reportedBy}">` +
+          `<input id="title" class="swal2-input" value="${bug.title}">` +
+          `<textarea id="desc" class="swal2-input">${bug.description}</textarea>`,
+        focusConfirm: false,
+        showCancelButton: true
       });
-      this.$store.dispatch("editBug", {
+      let editedBug = {
         id: bug.id,
-        reportedBy: document.getElementById("swal-input1").value,
-        title: document.getElementById("swal-input2").value,
-        description: document.getElementById("swal-input3").value
-      });
+        reportedBy: document.getElementById("name").value,
+        title: document.getElementById("title").value,
+        description: document.getElementById("desc").value
+      };
+      if (
+        (!editedBug.reportedBy || !editedBug.title || !editedBug.description) &&
+        !value.dismiss
+      ) {
+        Swal.fire("Please fill out all fields");
+      } else if (!value.dismiss) {
+        this.$store.dispatch("editBug", editedBug);
+      }
     },
     closeBug(id) {
       Swal.fire({

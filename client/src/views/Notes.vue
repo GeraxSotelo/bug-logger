@@ -42,7 +42,7 @@ export default {
       let dismiss = value.dismiss; //message returned if user exits modal
       if ((!note.reportedBy || !note.content) && !dismiss) {
         Swal.fire("Please fill out all fields");
-      } else {
+      } else if (!dismiss) {
         this.$store.dispatch("createNote", note);
       }
     }
