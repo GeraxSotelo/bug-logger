@@ -2,7 +2,7 @@
   <div class="bug-details container-fluid">
     <div class="row">
       <div class="col-12">
-        <p class="m-0">Title:</p>
+        <p class="m-0">Title</p>
       </div>
       <div class="col-12">
         <h1>{{bug.title}}</h1>
@@ -54,7 +54,7 @@ export default {
       const { value: formValues } = await Swal.fire({
         title: "Multiple inputs",
         html:
-          `<input id="swal-input1" class="swal2-input" value="${bug.reportedBy}">` +
+          `<input required id="swal-input1" class="swal2-input" value="${bug.reportedBy}">` +
           `<input id="swal-input2" class="swal2-input" value="${bug.title}">` +
           `<textarea id="swal-input3" class="swal2-input">${bug.description}</textarea>`,
         focusConfirm: false

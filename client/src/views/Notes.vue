@@ -39,16 +39,11 @@ export default {
         flagged: "pending",
         bug: this.$route.params.id
       };
-      let dismiss = value.dismiss;
-      if (note.reportedBy && note.content && !value.dismiss) {
-        console.log(value.dismiss);
-        this.$store.dispatch("createNote", note);
-      } else if (
-        (!note.reportedBy || !note.content) &&
-        dismiss != "cancel" &&
-        dismiss != "backdrop"
-      ) {
+      let dismiss = value.dismiss; //message returned if user exits modal
+      if ((!note.reportedBy || !note.content) && !dismiss) {
         Swal.fire("Please fill out all fields");
+      } else {
+        this.$store.dispatch("createNote", note);
       }
     }
   },

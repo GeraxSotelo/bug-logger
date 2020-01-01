@@ -53,7 +53,7 @@ export default {
             icon: "success",
             title: "Deleted",
             showConfirmButton: false,
-            timer: 850
+            timer: 800
           });
           this.$store.dispatch("deleteNote", {
             bugId: this.$route.params.id,
