@@ -2,25 +2,15 @@
   <div class="bugs container-fluid">
     <div class="row pb-1">
       <div class="col col-md-6 col-lg-4 mx-auto">
-        <h1>Report a Bug</h1>
+        <h2>Report a Bug</h2>
       </div>
     </div>
     <div class="row pt-3">
       <div class="col col-lg-10 mx-auto">
-        <button @click="createBug()" class="btn btn-danger p-3 mb-2">Report</button>
-        <table class="table table-bordered table-striped table-hover table-dark">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Reported By</th>
-              <th scope="col">Status</th>
-              <th scope="col">Last Modified</th>
-            </tr>
-          </thead>
-          <tbody>
-            <bug-component v-for="bug in bugs" :key="bug.id" :bugData="bug" />
-          </tbody>
-        </table>
+        <button @click="createBug()" class="report-btn btn btn-danger p-3 mb-2">Report</button>
+        <div>
+          <pagination-nav-component :bugList="bugs" />
+        </div>
       </div>
     </div>
   </div>
@@ -28,6 +18,7 @@
 
 <script>
 import BugComponent from "@/components/Bug";
+import PaginationNavComponent from "@/components/PaginationNav";
 export default {
   name: "bugs",
   mounted() {
@@ -71,7 +62,8 @@ export default {
     }
   },
   components: {
-    BugComponent
+    BugComponent,
+    PaginationNavComponent
   }
 };
 </script>
@@ -80,9 +72,8 @@ export default {
 .bugs {
   background-color: #e3b04b;
 }
-.form-group {
-  text-align: left;
-  margin-bottom: 0;
+.report-btn {
+  font-size: 1.8em;
 }
 label {
   margin-bottom: 0.15rem;

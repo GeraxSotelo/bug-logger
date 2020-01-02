@@ -38,7 +38,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getAllBugs({ commit, dispatch }) {
+    async getAllBugs({ commit, dispatch }, num) {
       let res = await _api.get("bugs");
       commit("setAllBugs", res.data);
     },
@@ -51,7 +51,7 @@ export default new Vuex.Store({
     async createBug({ commit, dispatch }, bug) {
       let res = await _api.post("bugs", bug);
       commit("addBug", res.data)
-      commit("setActiveBug", res.data); //REVIEW 
+      commit("setActiveBug", res.data);
     },
 
     async editBug({ commit, dispatch }, { id, reportedBy, title, description }) {

@@ -14,7 +14,7 @@
         </router-link>
       </div>
     </div>
-    <div class="row pt-3 bg-grey">
+    <div class="row pt-3 pb-4 bg-grey">
       <div class="col-12 card col-md-4 bg-grey">
         <i class="fas fa-bug"></i>
         <p>Report a Bug</p>
@@ -26,6 +26,11 @@
       <div class="col-12 card col-md-4 bg-grey">
         <i class="fas fa-laugh-beam"></i>
         <p>You're happy</p>
+      </div>
+    </div>
+    <div class="row info-container align-items-center p-4">
+      <div class="col-12 col-md-10 mx-auto">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, illo? Ex asperiores dolores ratione, atque iure inventore at ab optio deleniti distinctio officia sunt nihil eius reiciendis! Aliquid tempora, perferendis odit ipsum suscipit quasi, mollitia vero voluptatum sed voluptate fugiat. Neque vero aut placeat aliquid. Nobis possimus exercitationem fugit laboriosam, hic tempore maxime fuga quod, impedit optio amet pariatur voluptatibus! Maiores eaque non reprehenderit numquam atque perspiciatis velit pariatur, incidunt consequatur ullam repellendus, ut mollitia optio nemo enim?</p>
       </div>
     </div>
   </div>
@@ -66,5 +71,10 @@ export default {
 
 .card i {
   font-size: 3em;
+}
+
+.info-container {
+  background-color: #f1d6ab;
+  min-height: 10em;
 }
 </style>
