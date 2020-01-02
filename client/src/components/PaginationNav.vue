@@ -1,12 +1,30 @@
 <template>
   <div class="pagination-nav">
     <div class="text-right">
-      <button @click="prevList" :disabled="pageNumber==0">
-        <i class="fas chevron fa-chevron-circle-left"></i>
-      </button>
-      <button @click="nextList" :disabled="pageNumber>=totalPages-1">
-        <i class="fas chevron fa-chevron-circle-right"></i>
-      </button>
+      <ul class="pagination justify-content-end">
+        <li class="page-item" :class="{'disabled':pageNumber==0}">
+          <button @click="prevList" :disabled="pageNumber==0" class="page-link">
+            <i class="fas chevron fa-chevron-circle-left"></i>
+          </button>
+        </li>
+        <!-- <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">
+            2
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>-->
+        <li class="page-item" :class="{'disabled':pageNumber>=totalPages-1}">
+          <button @click="nextList" :disabled="pageNumber>=totalPages-1" class="page-link">
+            <i class="fas chevron fa-chevron-circle-right"></i>
+          </button>
+        </li>
+      </ul>
     </div>
     <table class="table table-bordered table-striped table-hover table-dark">
       <thead>
@@ -28,9 +46,6 @@
 import BugComponent from "@/components/Bug";
 export default {
   name: "PaginationNav",
-  mounted() {
-    // this.$store.dispatch("getAllBugs");
-  },
   props: {
     bugList: {
       type: Array,
@@ -76,12 +91,11 @@ export default {
 </script>
 
 <style>
-button {
-  background-color: transparent;
-  border: none;
+.pagination-nav button {
+  padding: 0.45rem 0.7rem;
 }
 .chevron {
-  font-size: 1.5em;
+  font-size: 1.2rem;
 }
 label {
   margin-bottom: 0.15rem;
