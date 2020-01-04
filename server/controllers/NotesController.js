@@ -6,7 +6,6 @@ export default class NotesController {
     this.router = express.Router()
       .get("", this.getAll)
       .post("", this.create)
-      .put(":id/notes/:id", this.edit)
       .delete("/:id", this.delete)
   }
 
@@ -23,15 +22,6 @@ export default class NotesController {
     try {
       let data = await NotesService.create(req.body)
       return res.status(201).send(data);
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async edit(req, res, next) {
-    try {
-      let data = await NotesService.edit(req.params.id, req.body)
-      res.send(data);
     } catch (error) {
       next(error)
     }
