@@ -7,8 +7,7 @@
             <i class="fas chevron fa-chevron-circle-left"></i>
           </button>
         </li>
-        <!-- FIXME fix page numbers -->
-        <li v-for="page in pageCount" class="page-item">
+        <li v-for="page in pageCount" class="page-item" :key="page.num">
           <a class="page-link" href="#">{{page.num}}</a>
         </li>
         <li class="page-item" :class="{'disabled':pageNumber>=totalPages-1}">
@@ -23,7 +22,7 @@
         <tr>
           <th scope="col">Title</th>
           <th scope="col">Reported By</th>
-          <th scope="col">Status</th>
+          <th @click="filterByStatus()" id="status" scope="col">Status</th>
           <th scope="col">Last Modified</th>
         </tr>
       </thead>
@@ -52,7 +51,13 @@ export default {
   data() {
     return {
       pageNumber: 0,
-      pageCount: []
+      pageCount: [],
+      filters: {
+        byStatus: {
+          filtered: false,
+          openFirst: false
+        }
+      }
     };
   },
   methods: {
@@ -62,12 +67,22 @@ export default {
     prevList() {
       this.pageNumber--;
     },
+    paginate(list) {
+      let start = this.pageNumber * this.listSize;
+      let end = start + this.listSize;
+      return list.slice(start, end);
+    },
     pages(num) {
       let arr = [];
       for (let i = 1; i <= num; i++) {
         arr.push({ num: i });
       }
       this.pageCount = arr;
+    },
+    filterByStatus() {
+      let status = this.filters.byStatus;
+      status.filtered = true;
+      status.openFirst = !status.openFirst;
     }
   },
   computed: {
@@ -78,9 +93,19 @@ export default {
       return rounded;
     },
     paginatedBugs() {
-      let start = this.pageNumber * this.listSize;
-      let end = start + this.listSize;
-      return this.bugList.slice(start, end);
+      let status = this.filters.byStatus;
+      let newList = this.bugList.slice();
+      if (status.filtered) {
+        if (status.openFirst) {
+          let tempArr = newList.filter(b => !b.closed);
+          newList = tempArr.concat(newList.filter(b => b.closed));
+        } else {
+          let tempArr = newList.filter(b => b.closed);
+          newList = tempArr.concat(newList.filter(b => !b.closed));
+        }
+        return this.paginate(newList);
+      }
+      return this.paginate(this.bugList);
     }
   },
   components: {
@@ -101,5 +126,8 @@ export default {
 }
 label {
   margin-bottom: 0.15rem;
+}
+#status {
+  cursor: pointer;
 }
 </style>
