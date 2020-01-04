@@ -7,18 +7,10 @@
             <i class="fas chevron fa-chevron-circle-left"></i>
           </button>
         </li>
-        <!-- <li class="page-item">
-          <a class="page-link" href="#">1</a>
+        <!-- FIXME fix page numbers -->
+        <li v-for="page in pageCount" class="page-item">
+          <a class="page-link" href="#">{{page.num}}</a>
         </li>
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="#">
-            2
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>-->
         <li class="page-item" :class="{'disabled':pageNumber>=totalPages-1}">
           <button @click="nextList" :disabled="pageNumber>=totalPages-1" class="page-link">
             <i class="fas chevron fa-chevron-circle-right"></i>
@@ -59,7 +51,8 @@ export default {
   },
   data() {
     return {
-      pageNumber: 0
+      pageNumber: 0,
+      pageCount: []
     };
   },
   methods: {
@@ -68,15 +61,21 @@ export default {
     },
     prevList() {
       this.pageNumber--;
+    },
+    pages(num) {
+      let arr = [];
+      for (let i = 1; i <= num; i++) {
+        arr.push({ num: i });
+      }
+      this.pageCount = arr;
     }
   },
   computed: {
-    // bugs() {
-    //   return this.$store.state.bugs;
-    // },
     totalPages() {
       let total = this.bugList.length / this.listSize;
-      return Math.ceil(total);
+      let rounded = Math.ceil(total);
+      this.pages(rounded);
+      return rounded;
     },
     paginatedBugs() {
       let start = this.pageNumber * this.listSize;
@@ -93,6 +92,9 @@ export default {
 <style>
 .pagination-nav button {
   padding: 0.45rem 0.7rem;
+}
+.page-link {
+  color: #222;
 }
 .chevron {
   font-size: 1.2rem;
