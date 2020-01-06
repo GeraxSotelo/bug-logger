@@ -11,7 +11,7 @@
       </router-link>
     </td>
     <td class="green-text" :class="{'red-text':bugData.closed}">
-      <div class="table-div">{{this.isClosed(bugData.closed)}}</div>
+      <div class="table-div">{{bugData.closed ? "Closed" : "Open"}}</div>
     </td>
     <td>
       <div class="table-div">{{this.convertDate(bugData.updatedAt)}}</div>
@@ -32,13 +32,6 @@ export default {
     convertDate(date) {
       let d = new Date(date);
       return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
-    },
-    isClosed(data) {
-      if (data) {
-        return "Closed";
-      } else {
-        return "Open";
-      }
     }
   }
 };
