@@ -8,7 +8,7 @@
           </button>
         </li>
         <li v-for="page in pageCount" class="page-item" :key="page.num">
-          <a class="page-link" href="#">{{page.num}}</a>
+          <a @click="pageNumber=page.num-1; scrollTo('table');" class="page-link">{{page.num}}</a>
         </li>
         <li class="page-item" :class="{'disabled':pageNumber>=totalPages-1}">
           <button @click="nextList" :disabled="pageNumber>=totalPages-1" class="page-link">
@@ -17,7 +17,7 @@
         </li>
       </ul>
     </div>
-    <table class="table table-bordered table-striped table-hover table-dark">
+    <table id="table" class="table table-bordered table-striped table-hover table-dark">
       <thead>
         <tr>
           <th scope="col">Title</th>
@@ -83,6 +83,12 @@ export default {
       let status = this.filters.byStatus;
       status.filtered = true;
       status.openFirst = !status.openFirst;
+    },
+    scrollTo(id) {
+      // top: this.$refs[ref].offsetTop,
+      document.querySelector(id).scrollIntoView({
+        behavior: "smooth"
+      });
     }
   },
   computed: {
