@@ -9,7 +9,7 @@
       <div class="col col-lg-10 mx-auto">
         <button @click="createBug()" class="report-btn btn btn-danger p-3 mb-2">Report</button>
         <div>
-          <pagination-nav-component :bugList="bugs" />
+          <bug-list-component :bugList="bugs" />
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
 
 <script>
 import BugComponent from "@/components/Bug";
-import PaginationNavComponent from "@/components/PaginationNav";
+import BugListComponent from "@/components/BugList";
 export default {
   name: "bugs",
   mounted() {
@@ -63,7 +63,7 @@ export default {
   },
   components: {
     BugComponent,
-    PaginationNavComponent
+    BugListComponent
   }
 };
 </script>

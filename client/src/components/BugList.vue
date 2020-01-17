@@ -1,14 +1,14 @@
 <template>
-  <div class="pagination-nav">
+  <div class="bug-list">
     <div class="text-right">
-      <ul class="pagination justify-content-end">
+      <ul @click="scrollTo('table')" class="pagination justify-content-end">
         <li class="page-item" :class="{'disabled':pageNumber==0}">
           <button @click="prevList" :disabled="pageNumber==0" class="page-link">
             <i class="fas chevron fa-chevron-circle-left"></i>
           </button>
         </li>
         <li v-for="page in pageCount" class="page-item" :key="page.num">
-          <a @click="pageNumber=page.num-1; scrollTo('table');" class="page-link">{{page.num}}</a>
+          <a @click="pageNumber=page.num-1" class="page-link">{{page.num}}</a>
         </li>
         <li class="page-item" :class="{'disabled':pageNumber>=totalPages-1}">
           <button @click="nextList" :disabled="pageNumber>=totalPages-1" class="page-link">
@@ -36,7 +36,7 @@
 <script>
 import BugComponent from "@/components/Bug";
 export default {
-  name: "PaginationNav",
+  name: "BugList",
   props: {
     bugList: {
       type: Array,
@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style>
-.pagination-nav button {
+.bug-list button {
   padding: 0.45rem 0.7rem;
 }
 .page-link {
