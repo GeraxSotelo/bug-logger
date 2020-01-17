@@ -1,8 +1,9 @@
 <template>
   <div class="bugs container-fluid">
-    <div class="row pb-1">
+    <div class="row pb-1 pt-2">
       <div class="col col-md-6 col-lg-4 mx-auto">
         <h2>Report a Bug</h2>
+        <hr />
       </div>
     </div>
     <div class="row pt-3">
@@ -68,9 +69,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+h2,
+.report-btn {
+  font-family: "Montserrat", sans-serif;
+}
+hr {
+  border: 1px solid black;
+}
 .bugs {
-  background-color: #e3b04b;
+  background-color: #d8d8d8;
 }
 .report-btn {
   font-size: 1.8em;

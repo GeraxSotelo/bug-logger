@@ -56,8 +56,8 @@ export default {
   margin-bottom: 0;
 }
 .home-container {
-  background-color: #e3b04b;
-  color: white;
+  background-color: #d8d8d8;
+  color: #333;
   padding-top: 2em;
   padding-bottom: 4.5em;
 }
@@ -74,7 +74,8 @@ export default {
 }
 
 .info-container {
-  background-color: #f1d6ab;
+  color: white;
+  background-color: #424242;
   min-height: 10em;
 }
 </style>
